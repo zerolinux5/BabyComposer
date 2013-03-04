@@ -1,5 +1,8 @@
 package com.zerolinux5.babycomposer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -8,19 +11,19 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements SensorEventListener {
 	static private final String LOG_TAG = "MainActivity";
 	SensorManager sensorManager = null;
-	
-	//for orientation values
-	TextView outputX;
-	TextView outputY;
-	TextView outputZ;
 	
 	//for the music player
 	private SoundPool soundPool;
@@ -39,6 +42,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	int timere;
 	int timerf;
 	int timerg;
+	ArrayList<String> NoteList = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	    timere = 0;
 	    timerf = 0;
 	    timerg = 0;
+	    
 	}
 
 	@Override
@@ -92,68 +97,106 @@ public class MainActivity extends Activity implements SensorEventListener {
 	        switch (event.sensor.getType()){
 	            case Sensor.TYPE_ORIENTATION:
 	            	Log.d(LOG_TAG, "x: "+event.values[0]+" y: "+event.values[1]+" z: "+event.values[2]);
+	            	TextView tv1 = (TextView) findViewById(R.id.textView1);
+	            	TextView tv3 = (TextView) findViewById(R.id.textView7);
+	            	Button tv2 = (Button) findViewById(R.id.button1);
+	            	if(event.values[1] < -113){
+	            		tv1.setText(R.string.none);
+	            		tv2.setText(R.string.none);
+	            		tv3.setText(R.string.G);
+	            		tv2.setVisibility(View.INVISIBLE);
+	            	}
 	            	if (event.values[1] < -107 && event.values[1] > -113){
+	            		tv1.setText(R.string.none);
+	            		tv2.setText(R.string.G);
+	            		tv3.setText(R.string.F);
+	            		tv2.setVisibility(View.VISIBLE);
 	            		timera++;
-	            		if (timera == 30){
-		            		setUpMusic(7);	      
-		            		timera =0;
+	            		if (timera == 25){
+	            			timera =0;
+		            		setUpMusic(7);
 	            		}
 	            		timerReset(1);
 	            	}
 	            	if (event.values[1] < -97 && event.values[1] > -103){
+	            		tv1.setText(R.string.G);
+	            		tv2.setText(R.string.F);
+	            		tv3.setText(R.string.E);
 	            		timerb++;
-	            		if (timerb == 30){
-		            		setUpMusic(6);	 
+	            		if (timerb == 25){
 		            		timerb =0;
+		            		setUpMusic(6);
 	            		}
 	            		timerReset(2);
 	            	}
 	            	if (event.values[1] < -87 && event.values[1] > -93){
+	            		tv1.setText(R.string.F);
+	            		tv2.setText(R.string.E);
+	            		tv3.setText(R.string.D);
 	            		timerc++;
-	            		if (timerc == 30){
-		            		setUpMusic(5);	 
+	            		if (timerc == 25){	 
 		            		timerc =0;
+		            		setUpMusic(5);
 	            		}
 	            		timerReset(3);
 	            	}
 	            	if (event.values[1] < -77 && event.values[1] > -83){
+	            		tv1.setText(R.string.E);
+	            		tv2.setText(R.string.D);
+	            		tv3.setText(R.string.C);
 	            		timerd++;
-	            		if (timerd == 30){
-		            		setUpMusic(4);	  
+	            		if (timerd == 25){  
 		            		timerd =0;
+		            		setUpMusic(4);	
 	            		}
 	            		timerReset(4);
 	            	}
 	            	if (event.values[1] < -67 && event.values[1] > -73){
+	            		tv1.setText(R.string.D);
+	            		tv2.setText(R.string.C);
+	            		tv3.setText(R.string.B);
 	            		timere++;
-	            		if (timere == 30){
-		            		setUpMusic(3);	 
+	            		if (timere == 25){ 
 		            		timere =0;
+		            		setUpMusic(3);	
 	            		}
 	            		timerReset(5);
 	            	}
 	            	if (event.values[1] < -57 && event.values[1] > -63){
+	            		tv1.setText(R.string.C);
+	            		tv2.setText(R.string.B);
+	            		tv3.setText(R.string.A);
 	            		timerf++;
-	            		if (timerf == 30){
-		            		setUpMusic(2);	
+	            		if (timerf == 25){
 		            		timerf =0;
+		            		setUpMusic(2);	
 	            		}
 	            		timerReset(6);
 	            	}
 	            	if (event.values[1] < -47 && event.values[1] > -53){
+	            		tv1.setText(R.string.B);
+	            		tv2.setText(R.string.A);
+	            		tv3.setText(R.string.none);
+	            		tv2.setVisibility(View.VISIBLE);
 	            		timerg++;
-	            		if (timerg == 30){
-		            		setUpMusic(1);	
+	            		if (timerg == 25){
 		            		timerg =0;
+		            		setUpMusic(1);	
 	            		}
 	            		timerReset(7);
+	            	}
+	            	if(event.values[1] > -47){
+	            		tv1.setText(R.string.A);
+	            		tv2.setText(R.string.none);
+	            		tv3.setText(R.string.none);
+	            		tv2.setVisibility(View.INVISIBLE);
 	            	}
 	            break;
 	 
 	        }
 	    }
 	 }
-	
+
 	@Override
 	 protected void onResume() {
 	    super.onResume();
@@ -272,6 +315,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 			timerf = 0;
 			break;
 		}
+	}
+	
+	public void saveNote(View v){
+		Button b = (Button)v;
+	    String buttonText = b.getText().toString();
+		NoteList.add(buttonText);
+		// Get instance of Vibrator from current Context
+		Vibrator confirmationVibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		// Vibrate for 300 milliseconds
+		confirmationVibrate.vibrate(300);
+
 	}
 
 }
