@@ -32,6 +32,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 	private int soundIDf;
 	private int soundIDg;
 	boolean loaded = false;
+	int timera;
+	int timerb;
+	int timerc;
+	int timerd;
+	int timere;
+	int timerf;
+	int timerg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 	    soundIDe = soundPool.load(this, R.raw.e, 1);
 	    soundIDf = soundPool.load(this, R.raw.f, 1);
 	    soundIDg = soundPool.load(this, R.raw.g, 1);
+	    timera = 0;
+	    timerb = 0;
+	    timerc = 0;
+	    timerd = 0;
+	    timere = 0;
+	    timerf = 0;
+	    timerg = 0;
 	}
 
 	@Override
@@ -79,25 +93,60 @@ public class MainActivity extends Activity implements SensorEventListener {
 	            case Sensor.TYPE_ORIENTATION:
 	            	Log.d(LOG_TAG, "x: "+event.values[0]+" y: "+event.values[1]+" z: "+event.values[2]);
 	            	if (event.values[1] < -107 && event.values[1] > -113){
-	            		setUpMusic(1);
+	            		timera++;
+	            		if (timera == 30){
+		            		setUpMusic(7);	      
+		            		timera =0;
+	            		}
+	            		timerReset(1);
 	            	}
 	            	if (event.values[1] < -97 && event.values[1] > -103){
-	            		setUpMusic(2);
+	            		timerb++;
+	            		if (timerb == 30){
+		            		setUpMusic(6);	 
+		            		timerb =0;
+	            		}
+	            		timerReset(2);
 	            	}
 	            	if (event.values[1] < -87 && event.values[1] > -93){
-	            		setUpMusic(3);
+	            		timerc++;
+	            		if (timerc == 30){
+		            		setUpMusic(5);	 
+		            		timerc =0;
+	            		}
+	            		timerReset(3);
 	            	}
 	            	if (event.values[1] < -77 && event.values[1] > -83){
-	            		setUpMusic(4);
+	            		timerd++;
+	            		if (timerd == 30){
+		            		setUpMusic(4);	  
+		            		timerd =0;
+	            		}
+	            		timerReset(4);
 	            	}
 	            	if (event.values[1] < -67 && event.values[1] > -73){
-	            		setUpMusic(5);
+	            		timere++;
+	            		if (timere == 30){
+		            		setUpMusic(3);	 
+		            		timere =0;
+	            		}
+	            		timerReset(5);
 	            	}
 	            	if (event.values[1] < -57 && event.values[1] > -63){
-	            		setUpMusic(6);
+	            		timerf++;
+	            		if (timerf == 30){
+		            		setUpMusic(2);	
+		            		timerf =0;
+	            		}
+	            		timerReset(6);
 	            	}
 	            	if (event.values[1] < -47 && event.values[1] > -53){
-	            		setUpMusic(7);
+	            		timerg++;
+	            		if (timerg == 30){
+		            		setUpMusic(1);	
+		            		timerg =0;
+	            		}
+	            		timerReset(7);
 	            	}
 	            break;
 	 
@@ -110,7 +159,14 @@ public class MainActivity extends Activity implements SensorEventListener {
 	    super.onResume();
 	    sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), sensorManager.SENSOR_DELAY_GAME);
 	    sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), sensorManager.SENSOR_DELAY_GAME);
-	 }
+	    timera = 0;
+	    timerb = 0;
+	    timerc = 0;
+	    timerd = 0;
+	    timere = 0;
+	    timerf = 0;
+	    timerg = 0;
+	}
 	
 	@Override
 	 protected void onStop() {
@@ -155,6 +211,67 @@ public class MainActivity extends Activity implements SensorEventListener {
 	    	  }
 	    	  
 	      }
+	}
+	
+	private void timerReset(int nonReset){
+		switch (nonReset){
+		case 1:
+			timerb = 0;
+			timerc = 0;
+			timerd = 0;
+			timere = 0;
+			timerf = 0;
+			timerg = 0;
+			break;
+		case 2:
+			timera = 0;
+			timerc = 0;
+			timerd = 0;
+			timere = 0;
+			timerf = 0;
+			timerg = 0;
+			break;
+		case 3:
+			timera = 0;
+			timerb = 0;
+			timerd = 0;
+			timere = 0;
+			timerf = 0;
+			timerg = 0;
+			break;
+		case 4:
+			timera = 0;
+			timerb = 0;
+			timerc = 0;
+			timere = 0;
+			timerf = 0;
+			timerg = 0;
+			break;
+		case 5:
+			timera = 0;
+			timerb = 0;
+			timerc = 0;
+			timerd = 0;
+			timerf = 0;
+			timerg = 0;
+			break;
+		case 6:
+			timera = 0;
+			timerb = 0;
+			timerc = 0;
+			timerd = 0;
+			timere = 0;
+			timerg = 0;
+			break;
+		case 7:
+			timera = 0;
+			timerb = 0;
+			timerc = 0;
+			timerd = 0;
+			timere = 0;
+			timerf = 0;
+			break;
+		}
 	}
 
 }
