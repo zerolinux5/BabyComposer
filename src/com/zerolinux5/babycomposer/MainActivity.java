@@ -336,7 +336,6 @@ public class MainActivity extends Activity implements SensorEventListener{
 			String playNote = NoteList.get(i);
 			Log.d(LOG_TAG, NoteList.get(i));
 			if (playNote.equals("A")){
-				Log.d(LOG_TAG, "why not playing?");
 				setUpMusic(1);
 			}
 			if (playNote.equals("B")){
