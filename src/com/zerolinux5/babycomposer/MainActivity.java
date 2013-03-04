@@ -21,7 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements SensorEventListener {
+public class MainActivity extends Activity implements SensorEventListener{
 	static private final String LOG_TAG = "MainActivity";
 	SensorManager sensorManager = null;
 	
@@ -100,6 +100,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	            	TextView tv1 = (TextView) findViewById(R.id.textView1);
 	            	TextView tv3 = (TextView) findViewById(R.id.textView7);
 	            	Button tv2 = (Button) findViewById(R.id.button1);
+	            	
 	            	if(event.values[1] < -113){
 	            		tv1.setText(R.string.none);
 	            		tv2.setText(R.string.none);
@@ -326,6 +327,48 @@ public class MainActivity extends Activity implements SensorEventListener {
 		// Vibrate for 300 milliseconds
 		confirmationVibrate.vibrate(300);
 
+	}
+	
+	public void playBack(View v){
+	    sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
+	    sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION));
+		for (int i = 0; i < NoteList.size(); i++){
+			String playNote = NoteList.get(i);
+			Log.d(LOG_TAG, NoteList.get(i));
+			if (playNote.equals("A")){
+				Log.d(LOG_TAG, "why not playing?");
+				setUpMusic(1);
+			}
+			if (playNote.equals("B")){
+				setUpMusic(2);
+			}
+			if (playNote.equals("C")){
+				setUpMusic(3);
+			}
+			if (playNote.equals("D")){
+				setUpMusic(4);
+			}
+			if (playNote.equals("E")){
+				setUpMusic(5);
+			}
+			if (playNote.equals("F")){
+				setUpMusic(6);
+			}
+			if (playNote.equals("G")){
+				setUpMusic(7);
+			}
+			try {Thread.sleep(500);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+		}
+	    sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), sensorManager.SENSOR_DELAY_GAME);
+	    sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), sensorManager.SENSOR_DELAY_GAME);
+	}
+	
+	public void reset(View v){
+		NoteList.clear();
 	}
 
 }
