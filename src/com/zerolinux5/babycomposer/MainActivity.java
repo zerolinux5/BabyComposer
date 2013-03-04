@@ -78,22 +78,27 @@ public class MainActivity extends Activity implements SensorEventListener {
 	        switch (event.sensor.getType()){
 	            case Sensor.TYPE_ORIENTATION:
 	            	Log.d(LOG_TAG, "x: "+event.values[0]+" y: "+event.values[1]+" z: "+event.values[2]);
-	            	if (event.values[1] < -95 && event.values[1] > -105){
-	            		Log.d(LOG_TAG, "Succeded");
-	            	      // Getting the user sound settings
-	            	      AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-	            	      float actualVolume = (float) audioManager
-	            	          .getStreamVolume(AudioManager.STREAM_MUSIC);
-	            	      float maxVolume = (float) audioManager
-	            	          .getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-	            	      float volume = actualVolume / maxVolume;
-	            	      // Is the sound loaded already?
-	            	      if (loaded) {
-	            	    	  Log.d(LOG_TAG, "play sound");
-	            	        soundPool.play(soundIDa, volume, volume, 1, 0, 1f);
-	            	      }
+	            	if (event.values[1] < -107 && event.values[1] > -113){
+	            		setUpMusic(1);
 	            	}
-	            	
+	            	if (event.values[1] < -97 && event.values[1] > -103){
+	            		setUpMusic(2);
+	            	}
+	            	if (event.values[1] < -87 && event.values[1] > -93){
+	            		setUpMusic(3);
+	            	}
+	            	if (event.values[1] < -77 && event.values[1] > -83){
+	            		setUpMusic(4);
+	            	}
+	            	if (event.values[1] < -67 && event.values[1] > -73){
+	            		setUpMusic(5);
+	            	}
+	            	if (event.values[1] < -57 && event.values[1] > -63){
+	            		setUpMusic(6);
+	            	}
+	            	if (event.values[1] < -47 && event.values[1] > -53){
+	            		setUpMusic(7);
+	            	}
 	            break;
 	 
 	        }
@@ -113,5 +118,43 @@ public class MainActivity extends Activity implements SensorEventListener {
 	    sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
 	    sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION));
 	 }
+	
+	private void setUpMusic(int value){
+		Log.d(LOG_TAG, "Succeded");
+	      // Getting the user sound settings
+	      AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+	      float actualVolume = (float) audioManager
+	          .getStreamVolume(AudioManager.STREAM_MUSIC);
+	      float maxVolume = (float) audioManager
+	          .getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+	      float volume = actualVolume / maxVolume;
+	      // Is the sound loaded already?
+	      if (loaded) {
+	    	  switch (value){
+	    	  	case 1:
+	    	  		soundPool.play(soundIDa, volume, volume, 1, 0, 1f);
+	    	  		break;
+	    	  	case 2:
+	    	  		soundPool.play(soundIDb, volume, volume, 1, 0, 1f);
+	    	  		break;
+	    	  	case 3:
+	    	  		soundPool.play(soundIDc, volume, volume, 1, 0, 1f);
+		    		break;
+	    	  	case 4:
+	    	  		soundPool.play(soundIDd, volume, volume, 1, 0, 1f);
+		    		break;
+	    	  	case 5:
+	    	  		soundPool.play(soundIDe, volume, volume, 1, 0, 1f);
+		    		break;
+	    	  	case 6:
+	    	  		soundPool.play(soundIDf, volume, volume, 1, 0, 1f);
+		    		break;
+	    	  	case 7:
+	    	  		soundPool.play(soundIDg, volume, volume, 1, 0, 1f);
+		    		break;
+	    	  }
+	    	  
+	      }
+	}
 
 }
