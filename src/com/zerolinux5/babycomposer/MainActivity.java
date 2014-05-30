@@ -1,8 +1,6 @@
 package com.zerolinux5.babycomposer;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -17,7 +15,6 @@ import android.content.Context;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
